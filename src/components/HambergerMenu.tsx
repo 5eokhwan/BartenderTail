@@ -7,7 +7,7 @@ const H = {
         position: relative;
         width: 25px;
         height: 25px;
-        background: #37a6ff;
+        background: ${({ theme }) => theme.deepTeal};
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -19,18 +19,18 @@ const H = {
             position: absolute;
             width: 15px;
             height: 1px;
-            background: #fff;
+            background: ${({ theme }) => theme.beige};
             transition: 0.2s;
             transform: translateY(-5px);
-            box-shadow: 0 5px 0 #fff;
+            box-shadow: 0 5px 0 ${({ theme }) => theme.beige};
         }
-        
+
         &::after {
             content: '';
             position: absolute;
             width: 15px;
             height: 1px;
-            background: #fff;
+            background: ${({ theme }) => theme.beige};
             transition: 0.2s;
             transform: translateY(5px);
         }
@@ -47,7 +47,6 @@ const H = {
     `,
 
     Menu: styled.div`
-
     `
 }
 

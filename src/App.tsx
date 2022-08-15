@@ -29,7 +29,7 @@ function App() {
       <GlobalStyle />
         <div className="App">
           <ModeToggleWrapper>
-            <ModeToggle isLight={isLight} height={20} onToggle={toggleTheme}/>
+            <ModeToggle isLight={isLight} height={35} onToggle={toggleTheme}/>
           </ModeToggleWrapper>
           <MenuBtnWrapper>
             <HambergerMenu />

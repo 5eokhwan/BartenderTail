@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     
     body {
         font-family: SansRegular;
-        background: ${({ theme }) => theme.white};
+        background: ${({ theme }) => theme.teal};
         transition: 0.25s;
     }
     *, *::before, *::after {

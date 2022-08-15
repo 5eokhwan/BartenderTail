@@ -9,15 +9,27 @@ export const fontSizes = {
 const colors = {
     black: "#000",
     white: "#fff",
+    beige: "#F7ECDE",
+    deepBeige: "#E9DAC1",
+    teal: "#9ED2C6",
+    deepTeal: "#54BAB9"
 };
 
 export const mode = {
     light: {
         black: colors.black,
-        white: colors.white
+        white: colors.white,
+        beige: colors.beige,
+        deepBeige: colors.deepBeige,
+        teal: colors.teal,
+        deepTeal: colors.deepTeal
     },
     dark: {
         black: colors.white,
-        white: colors.black
+        white: colors.black,
+        beige: "#4e0076",
+        deepBeige: "#3F0071",
+        teal: "#150050",
+        deepTeal: "#000000"
     }
 };
