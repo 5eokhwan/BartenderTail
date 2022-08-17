@@ -1,4 +1,8 @@
-const glass = {
+interface IGlass {
+    [key: string]: string;
+}
+
+const glass : IGlass = {
     1: "Cocktail Glass",
     2: "Old Fashioned Glass",
     3: "Sour Glass",
@@ -11,3 +15,5 @@ const glass = {
     10: "White Wine Glass",
     11: "Flute Champagne Glass"
 }
+
+export default glass;

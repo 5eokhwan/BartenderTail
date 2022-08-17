@@ -1,4 +1,28 @@
-const ingredient = {
+interface IIngredient {
+    base: {
+        [key: string]: string;
+    };
+    liqueur: {
+        [key: string]: string;
+    };
+    juice: {
+        [key: string]: string;
+    };
+    beverage: {
+        [key: string]: string;
+    };
+    wine: {
+        [key: string]: string;
+    };
+    traditional: {
+        [key: string]: string;
+    };
+    etc: {
+        [key: string]: string;
+    };
+}
+
+const ingredient: IIngredient = {
     base: {
         1: "Bourbun Whiskey",
         2: "Scotch Whisky",
@@ -70,7 +94,11 @@ const ingredient = {
     }
 };
 
-const unit = {
+interface IUnit {
+    [key: string]: string;
+}
+
+export const unit : IUnit = {
     1: "oz",
     2: "tsp",
     3: "dash",
@@ -79,3 +107,5 @@ const unit = {
     6: "fill",
     7: "on-top"
 }
+
+export default ingredient;

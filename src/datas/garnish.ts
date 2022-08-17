@@ -1,4 +1,8 @@
-const garnish = {
+interface IGarnish {
+    [key: string]: string;
+}
+
+const garnish : IGarnish = {
     1: "Cherry",
     2: "Orange Slice",
     3: "Lemon Slice",
@@ -10,3 +14,5 @@ const garnish = {
     9: "Rimming With Salt",
     10: "Olive"
 };
+
+export default garnish;

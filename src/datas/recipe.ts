@@ -1,17 +1,6 @@
-interface IRecipes {
-    name: string,
-    glass: number,
-    technique: number[],
-    ingredient:{
-        type: "base" | "liqueur" | "juice" | "beverage" | "wine" | "traditional" | "etc",
-        name: number,
-        amount?: number,
-        unit: number,
-    }[],
-    ganish: number[]
-}
+import { IRecipe } from "../common/interface/data";
 
-const recipes: IRecipes[] = [
+const recipes: IRecipe[] = [
     {
         name: "Manhattan",
         glass: 1,
@@ -110,38 +99,6 @@ const recipes: IRecipes[] = [
                 name: 1,
                 amount: 1/2,
                 unit: 1
-            }
-        ],
-        ganish: [3]
-    },
-    {
-        name: "New York",
-        glass: 1,
-        technique: [3],
-        ingredient: [
-            {
-                type: "base",
-                name: 1,
-                amount: 1 + 1/2,
-                unit: 1,
-            },
-            {
-                type: "juice",
-                name: 1,
-                amount: 1/2,
-                unit: 1,
-            },
-            {
-                type: "etc",
-                name: 1,
-                amount: 1,
-                unit: 2,
-            },
-            {
-                type: "etc",
-                name: 2,
-                amount: 1/2,
-                unit: 2,
             }
         ],
         ganish: [3]
@@ -301,31 +258,6 @@ const recipes: IRecipes[] = [
             },
         ],
         ganish: []
-    },
-    {
-        name: "Moscow Mule",
-        glass: 4,
-        technique: [1],
-        ingredient: [
-            {
-                type: "base",
-                name: 5,
-                amount: 1 + 1/2,
-                unit: 1,
-            },
-            {
-                type: "juice",
-                name: 1,
-                amount: 1/2,
-                unit: 1,
-            },
-            {
-                type: "beverage",
-                name: 2,
-                unit: 6,
-            },
-        ],
-        ganish: [3]
     },
     {
         name: "Moscow Mule",
@@ -1221,3 +1153,4 @@ const recipes: IRecipes[] = [
     
 ];
 
+export default recipes;
