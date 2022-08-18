@@ -1,6 +1,5 @@
 import { ReactElement, useState } from "react"
-import styled, { css } from "styled-components"
-import { darken, lighten } from "polished";
+import styled from "styled-components"
 
 const C = {
   Wrapper : styled.div<{isFront: boolean}>`
@@ -12,6 +11,7 @@ const C = {
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
+    margin: 5px;
   `,
   FrontFace: styled.div`
     font-size: 2rem;

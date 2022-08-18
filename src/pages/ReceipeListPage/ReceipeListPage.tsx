@@ -1,63 +1,68 @@
-import { lighten } from 'polished';
-import React, { useState } from 'react'
-import styled, { css } from 'styled-components';
+import React, { useState, useRef, useEffect } from 'react';
 import { IRecipe } from '../../common/interface/data';
 import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
 import RecipeInfoFace from '../../components/Card/Face/RecipeInfoFace';
 import recipes from '../../datas/recipe';
 import CardCounter from './component/CardCounter';
+import { R }  from './ReceipeListPage.style'; 
 
-
-const R = {
-  Wrapper: styled.div`
-    height: 100vh;
-    width: 100vw;
-  `,
-  CounterWrapper: styled.div`
-    height: 15%;
-    padding: auto 0;
-  `,
-  ListDisplay : styled.div`
-    height: 70%;
-    min-height: 500px;
-    width: 100vw;
-    overflow: hidden;
-    transition: 0.25s;
-    ${({ theme }) => {
-      const selected = theme.teal;
-      return css`
-          background: ${selected};
-          &:hover {
-            background: ${lighten(0.05, selected)};
-          }
-      `;
-    }};
-    `,
-    CardContainer: styled.div<{scrollX: number}>`
-    padding: 3.5em 0;
-    height: 100%;
-    display: flex;
-    align-item: center;
-    transform: translate(${({ scrollX }) => scrollX}px);
-  `,
-}
-//window.innerWidth
 const RecipeListPage: React.FC = () => {
   const [recipesList, setRecipesList] = useState<IRecipe[]>(recipes);
   const [activeCardIdx, setActiveCardIdx] = useState<number>(0);
-  const [cardWidth, setCardWidth] = useState<number>(400);
   
-  const scrollX = -(activeCardIdx * cardWidth) + (window.innerWidth / 2)
-    - (cardWidth / 2);
+  const [cardWidth, setCardWidth] = useState<number>(400);
+  const [cardMargin, setCardMargin] = useState<number>(5);
+  
+  const elementWidth = cardWidth + (cardMargin * 2);
+  
+  const $container = useRef<HTMLDivElement>(null);
+  const originX = useRef<null | number>(null);
+  
+  const currentContainerX = -(activeCardIdx * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
+
+  const getActiveCardIdx = (x : number) : number => {
+    const whiteSpace = (window.innerWidth / 2) - (elementWidth / 2);
+    return Math.abs(Math.round(( x - whiteSpace ) / elementWidth));
+  }
+
+  useEffect(() => {
+    document.onmousemove = (e) => {
+      if(originX.current && $container.current) {
+        $container.current.style.transform = `translate(${currentContainerX + (e.clientX - originX.current)}px)`;
+      }
+    }
+    document.onmouseup = (e) => {
+      if(originX.current && $container.current) {
+        $container.current.style.transform = "";
+        $container.current.style.transition = "1s";
+        console.log(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
+        setActiveCardIdx(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
+        originX.current = null;
+      }
+    }
+    return () => {
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+  }, [elementWidth, currentContainerX])
+
+  const ctrMouseDown = (e: React.MouseEvent<HTMLDivElement>) : void => {
+    if($container.current) {
+      $container.current.style.transition = "";
+      originX.current = e.clientX;
+    }
+  }
+
   return (
     <R.Wrapper>
       <R.CounterWrapper>
-        <CardCounter all={recipesList.length} cur={1}/>
+        <CardCounter all={recipesList.length} cur={activeCardIdx + 1}/>
       </R.CounterWrapper>
-      <R.ListDisplay>
-        <R.CardContainer scrollX={scrollX}>
+      <R.ListDisplay onMouseDown={ctrMouseDown}>
+        <R.CardContainer ref={$container} activeCardIdx={activeCardIdx} elementWidth={elementWidth}>
           {recipesList.map(v => <Card
+            key={v.name}
             frontFace={<RecipeInfoFace data={v}/>} 
             backFace={<RecipeInfoBackFace data={v}/>}
           />)}

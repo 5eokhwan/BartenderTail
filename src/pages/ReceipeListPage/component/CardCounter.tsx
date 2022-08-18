@@ -3,8 +3,10 @@ import styled from "styled-components";
 const C = {
     Wrapper: styled.div`
         font-size: 3.5em;
+        font-family: SansBold;
         display: flex;
         justify-content: center;
+        color: ${({ theme }) => theme.white};
     `,
 
 }

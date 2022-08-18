@@ -5,20 +5,21 @@ const H = {
     Wrapper: styled.div``,
     ActiveBtn: styled.div<{isActive : boolean}>`
         position: relative;
-        width: 25px;
-        height: 25px;
+        width: 50px;
+        height: 50px;
         background: ${({ theme }) => theme.deepTeal};
         cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
         transition: 0.2s;
+        border-radius: 50% 0 0 50%;
 
         &::before {
             content: '';
             position: absolute;
             width: 15px;
-            height: 1px;
+            height: 2px;
             background: ${({ theme }) => theme.beige};
             transition: 0.2s;
             transform: translateY(-5px);
@@ -29,7 +30,7 @@ const H = {
             content: '';
             position: absolute;
             width: 15px;
-            height: 1px;
+            height: 2px;
             background: ${({ theme }) => theme.beige};
             transition: 0.2s;
             transform: translateY(5px);
@@ -45,8 +46,16 @@ const H = {
             }`
         };
     `,
-
-    Menu: styled.div`
+    ColBar: styled.div`
+        width: 30px;
+        height: 2px;
+        position: absolute;
+        left: 7px;
+        background: ${({ theme }) => theme.deepTeal};
+        transform: rotate(90deg);
+        z-index: 1;
+    `,
+    ListWrapper: styled.div`
     `
 }
 
@@ -60,11 +69,11 @@ const HambergerMenu : React.FC = () => {
     return (
         <H.Wrapper>
             <H.ActiveBtn onClick={onToggle} isActive={isActive}>
-
+                {isActive || <H.ColBar />}
             </H.ActiveBtn>
-            <H.Menu>
+            <H.ListWrapper>
 
-            </H.Menu>
+            </H.ListWrapper>
         </H.Wrapper>
     )
 }

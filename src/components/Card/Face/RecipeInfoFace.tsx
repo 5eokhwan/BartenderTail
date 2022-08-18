@@ -70,14 +70,14 @@ const RecipeInfoFace : React.FC<IRecipeInfoFace> = ({ data }) => {
             <R.Technique>
                 <R.Title>기법</R.Title>
                 <R.Content length={data.technique.length}>
-                    {data.technique.map(v =>(<div>{technique[v]}</div>))}
+                    {data.technique.map((v, i) =>(<div key={i}>{technique[v]}</div>))}
                 </R.Content>
             </R.Technique>
             <R.Recipe>
                 <R.Title>레시피</R.Title>
                 <R.Content length={data.ingredient.length}>
-                    {data.ingredient.map(v => 
-                        (<div>{ingredient[v.type][v.name]}
+                    {data.ingredient.map((v, i) => 
+                        (<div key={i}>{ingredient[v.type][v.name]}
                         {v.amount && <span>{v.amount}</span>}
                         <span>{unit[v.unit]}</span></div>))
                     }
@@ -86,7 +86,7 @@ const RecipeInfoFace : React.FC<IRecipeInfoFace> = ({ data }) => {
             <R.Garnish>
                 <R.Title>가니쉬</R.Title>
                 <R.Content length={1}>
-                    {data.ganish.map(v => (<div>{garnish[v]}</div>))}
+                    {data.ganish.map((v,i) => (<div key={i}>{garnish[v]}</div>))}
                 </R.Content>
             </R.Garnish>
         </>
