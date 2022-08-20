@@ -11,6 +11,7 @@ export const R = {
       padding: auto 0;
     `,
     ListDisplay : styled.div`
+      cursor: grab;
       height: 70%;
       min-height: 500px;
       width: 100vw;

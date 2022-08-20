@@ -1,15 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IRecipe } from '../../common/interface/data';
+import { IRecipeItem } from '../../common/interface/recipe';
 import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
 import RecipeInfoFace from '../../components/Card/Face/RecipeInfoFace';
-import recipes from '../../datas/recipe';
 import CardCounter from './component/CardCounter';
-import { R }  from './ReceipeListPage.style'; 
+import { R }  from './ReceipeListPage.style';
 
-const RecipeListPage: React.FC = () => {
-  const [recipesList, setRecipesList] = useState<IRecipe[]>(recipes);
-  const [activeCardIdx, setActiveCardIdx] = useState<number>(0);
+interface IRecipeListPage {
+  recipesList: IRecipeItem[];
+  setRecipesList: React.Dispatch<React.SetStateAction<IRecipeItem[]>>;
+  activeRecipe: number;
+  setActiveRecipe: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList, activeRecipe, setActiveRecipe}) => {
+  const visibleRecipeCnt = recipesList.filter(v => v.show === true).length;
+
   
   const [cardWidth, setCardWidth] = useState<number>(400);
   const [cardMargin, setCardMargin] = useState<number>(5);
@@ -19,7 +25,7 @@ const RecipeListPage: React.FC = () => {
   const $container = useRef<HTMLDivElement>(null);
   const originX = useRef<null | number>(null);
   
-  const currentContainerX = -(activeCardIdx * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
+  const currentContainerX = -(activeRecipe * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
 
   const getActiveCardIdx = (x : number) : number => {
     const whiteSpace = (window.innerWidth / 2) - (elementWidth / 2);
@@ -36,8 +42,7 @@ const RecipeListPage: React.FC = () => {
       if(originX.current && $container.current) {
         $container.current.style.transform = "";
         $container.current.style.transition = "1s";
-        console.log(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
-        setActiveCardIdx(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
+        setActiveRecipe(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
         originX.current = null;
       }
     }
@@ -57,11 +62,11 @@ const RecipeListPage: React.FC = () => {
   return (
     <R.Wrapper>
       <R.CounterWrapper>
-        <CardCounter all={recipesList.length} cur={activeCardIdx + 1}/>
+        <CardCounter all={visibleRecipeCnt} cur={activeRecipe + 1} />
       </R.CounterWrapper>
       <R.ListDisplay onMouseDown={ctrMouseDown}>
-        <R.CardContainer ref={$container} activeCardIdx={activeCardIdx} elementWidth={elementWidth}>
-          {recipesList.map(v => <Card
+        <R.CardContainer ref={$container} activeCardIdx={activeRecipe} elementWidth={elementWidth}>
+          {recipesList.map(v => v.show && <Card
             key={v.name}
             frontFace={<RecipeInfoFace data={v}/>} 
             backFace={<RecipeInfoBackFace data={v}/>}

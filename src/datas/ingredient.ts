@@ -24,7 +24,7 @@ interface IIngredient {
 
 const ingredient: IIngredient = {
     base: {
-        1: "Bourbun Whiskey",
+        1: "Bourbun Whisky",
         2: "Scotch Whisky",
         3: "Brandy",
         4: "Apple Brandy",

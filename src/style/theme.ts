@@ -15,6 +15,19 @@ const colors = {
     deepTeal: "#54BAB9"
 };
 
+export const deviceSizes = {
+    mobile: "375px",
+    tablet: "768px",
+    laptop: "1024px",
+  };
+
+const device = {
+    mobile: `screen and (max-width: ${deviceSizes.mobile})`,
+    tablet: `screen and (max-width: ${deviceSizes.tablet})`,
+    laptop: `screen and (max-width: ${deviceSizes.laptop})`,
+    portrait : `screen and (orientation: portrait)`,
+};
+
 export const mode = {
     light: {
         black: colors.black,
@@ -22,14 +35,16 @@ export const mode = {
         beige: colors.beige,
         deepBeige: colors.deepBeige,
         teal: colors.teal,
-        deepTeal: colors.deepTeal
+        deepTeal: colors.deepTeal,
+        device,
     },
     dark: {
         black: colors.white,
         white: colors.black,
         beige: "#4e0076",
         deepBeige: "#3F0071",
-        teal: "#150050",
-        deepTeal: "#000000"
+        teal: "#23086e",
+        deepTeal: "#0f0138",
+        device,
     }
 };

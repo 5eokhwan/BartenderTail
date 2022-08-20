@@ -8,5 +8,11 @@ declare module 'styled-components' {
         deepBeige: string;
         teal: string;
         deepTeal: string;
+        device: {
+            mobile: string;
+            tablet: string;
+            laptop: string;
+            portrait: string;
+        };
     }
 }

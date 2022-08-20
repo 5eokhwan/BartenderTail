@@ -25,7 +25,7 @@ const recipes: IRecipe[] = [
                 unit: 3
             }
         ],
-        ganish: [1]
+        ganish: [1],
     },
     {
         name: "Old Fashioned",
