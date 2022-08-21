@@ -11,6 +11,7 @@ import { IRecipeItem } from './common/interface/recipe';
 const {light, dark} = mode;
 
 const MainWrapper = styled.main`
+  width: ${window.innerWidth }px;
 `;
 
 const ModeToggleWrapper = styled.div`
@@ -33,6 +34,7 @@ function App() {
     recipe.show = true;
     return recipe;
   }));
+
 
   const [activeRecipeId, setActiveRecipeId] = useState<number>(0);
   

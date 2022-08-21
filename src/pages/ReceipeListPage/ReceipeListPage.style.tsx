@@ -4,17 +4,19 @@ import { lighten } from 'polished';
 export const R = {
     Wrapper: styled.div`
       height: 100vh;
-      width: 100vw;
+      // width: 100vw;
+      width: 100%;
     `,
     CounterWrapper: styled.div`
       height: 15%;
-      padding: auto 0;
+      padding: 0.5em 0;
     `,
     ListDisplay : styled.div`
+      user-select: none;
       cursor: grab;
       height: 70%;
       min-height: 500px;
-      width: 100vw;
+      width: 100%;
       overflow: hidden;
       transition: 0.25s;
       ${({ theme }) => {
