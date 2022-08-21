@@ -12,7 +12,7 @@ function useInputs<T>(initialForm : T) {
         }));
     }, []);
 
-    return {form, onChange};
+    return {form, setForm, onChange};
 }
 
 export default useInputs;

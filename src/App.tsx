@@ -34,7 +34,7 @@ function App() {
     return recipe;
   }));
 
-  const [activeRecipe, setActiveRecipe] = useState<number>(0);
+  const [activeRecipeId, setActiveRecipeId] = useState<number>(0);
   
   
   const [isLight, setIsLight] = useState(true);
@@ -49,10 +49,10 @@ function App() {
             <ModeToggle isLight={isLight} height={35} onToggle={toggleTheme}/>
           </ModeToggleWrapper>
           <ListTravelerWrapper>
-            <ListTraveler activeRecipe={activeRecipe} setActiveRecipe={setActiveRecipe} recipesList={recipesList} setRecipesList={setRecipesList}/>
+            <ListTraveler activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
           </ListTravelerWrapper>
           <MainWrapper>
-            <RecipeListPage activeRecipe={activeRecipe} setActiveRecipe={setActiveRecipe} recipesList={recipesList} setRecipesList={setRecipesList}/>
+            <RecipeListPage activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
           </MainWrapper>
         </div>
       </ThemeProvider>

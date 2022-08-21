@@ -76,7 +76,8 @@ const M = {
             width: 55%;
             height: 55%;
             border-radius: 50%;
-            background: #22005c;
+            transition: background 0.5s;
+            background: ${({isLight}) => isLight ? '#1cb7ff' : '#22005c'};
         }
     `
 }

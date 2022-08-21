@@ -8,7 +8,7 @@ interface ISearchBar {
 }
 
 const SearchBar : React.FC<ISearchBar> = ({ setFilters }) => {
-    const { form, onChange } = useInputs<IFilter>({
+    const { form, setForm, onChange } = useInputs<IFilter>({
         type: 'name',
         value: '',
     });
@@ -22,7 +22,12 @@ const SearchBar : React.FC<ISearchBar> = ({ setFilters }) => {
             const newFilters: IFilter[] = pre.slice();
             newFilters.push(form);
             return newFilters;
-        })
+        });
+        setForm({
+            ...form,
+            value: '',
+        });
+
     }
     
     return (
@@ -30,7 +35,7 @@ const SearchBar : React.FC<ISearchBar> = ({ setFilters }) => {
             <S.Select name="type" onChange={onChange}>
                 {selectInfo.map(v  => <S.Option key={v.label} value={v.value}>{v.label}</S.Option>)}
             </S.Select>
-            <S.InputText name="value" onChange={onChange} />
+            <S.InputText name="value" onChange={onChange} value={form.value} />
             <S.Button onClick={addFilter}>검색</S.Button>
         </S.Wrapper>
         // <FilterBox type="타입" value="벨류" />

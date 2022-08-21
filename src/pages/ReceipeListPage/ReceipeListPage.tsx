@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef,useMemo, useEffect } from 'react';
 import { IRecipeItem } from '../../common/interface/recipe';
 import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
@@ -9,27 +9,34 @@ import { R }  from './ReceipeListPage.style';
 interface IRecipeListPage {
   recipesList: IRecipeItem[];
   setRecipesList: React.Dispatch<React.SetStateAction<IRecipeItem[]>>;
-  activeRecipe: number;
-  setActiveRecipe: React.Dispatch<React.SetStateAction<number>>;
+  activeRecipeId: number;
+  setActiveRecipeId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList, activeRecipe, setActiveRecipe}) => {
+const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList, activeRecipeId, setActiveRecipeId}) => {
   const visibleRecipeCnt = recipesList.filter(v => v.show === true).length;
 
-  
   const [cardWidth, setCardWidth] = useState<number>(400);
   const [cardMargin, setCardMargin] = useState<number>(5);
   
   const elementWidth = cardWidth + (cardMargin * 2);
   
+  const displayedList = useMemo(() => recipesList.filter((v) => v.show === true), [recipesList]);
+
+  const displayedActiveRecipeIdx = displayedList.findIndex((v) => v.id === activeRecipeId);
+  
   const $container = useRef<HTMLDivElement>(null);
   const originX = useRef<null | number>(null);
   
-  const currentContainerX = -(activeRecipe * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
+  const currentContainerX = -(displayedActiveRecipeIdx * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
 
   const getActiveCardIdx = (x : number) : number => {
     const whiteSpace = (window.innerWidth / 2) - (elementWidth / 2);
-    return Math.abs(Math.round(( x - whiteSpace ) / elementWidth));
+    let result =  Math.abs(Math.round(( x - whiteSpace ) / elementWidth));
+    if(result >= displayedList.length) {
+      result = displayedList.length - 1;
+    }
+    return result;
   }
 
   useEffect(() => {
@@ -42,7 +49,7 @@ const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList,
       if(originX.current && $container.current) {
         $container.current.style.transform = "";
         $container.current.style.transition = "1s";
-        setActiveRecipe(getActiveCardIdx(currentContainerX + (e.clientX - originX.current)));
+        setActiveRecipeId(displayedList[getActiveCardIdx(currentContainerX + (e.clientX - originX.current))].id);
         originX.current = null;
       }
     }
@@ -50,7 +57,7 @@ const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList,
       document.onmousemove = null;
       document.onmouseup = null;
     }
-  }, [elementWidth, currentContainerX])
+  }, [elementWidth, currentContainerX, displayedList])
 
   const ctrMouseDown = (e: React.MouseEvent<HTMLDivElement>) : void => {
     if($container.current) {
@@ -62,10 +69,10 @@ const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList,
   return (
     <R.Wrapper>
       <R.CounterWrapper>
-        <CardCounter all={visibleRecipeCnt} cur={activeRecipe + 1} />
+        <CardCounter all={visibleRecipeCnt} cur={displayedActiveRecipeIdx + 1} />
       </R.CounterWrapper>
       <R.ListDisplay onMouseDown={ctrMouseDown}>
-        <R.CardContainer ref={$container} activeCardIdx={activeRecipe} elementWidth={elementWidth}>
+        <R.CardContainer ref={$container} activeCardIdx={displayedActiveRecipeIdx} elementWidth={elementWidth}>
           {recipesList.map(v => v.show && <Card
             key={v.name}
             frontFace={<RecipeInfoFace data={v}/>} 

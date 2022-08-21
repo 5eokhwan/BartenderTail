@@ -4,6 +4,9 @@ import styled from "styled-components"
 const C = {
   Wrapper : styled.div<{isFront: boolean}>`
     min-width: 400px;
+    @media ${({ theme }) => theme.device.portrait} {
+      min-width: 85vw;
+    }
     height: 100%;
     background: ${({ theme }) => theme.beige};
     border-radius: 10px;
