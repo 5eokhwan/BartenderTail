@@ -23,8 +23,8 @@ const F = {
     Content: styled.span`
         display: inline-block;
         max-width: 15em;
+        height: auto;
         padding-right: 0.5em;
-        overflow: hidden;
     `,
     CloseBtn: styled.span`
         cursor: pointer;

@@ -20,7 +20,7 @@ const ItemRow = styled.div`
 `;
 
 const H = {
-    Wrapper: styled.div<{isActive : boolean}>`
+    Wrapper: styled.div<{isActive : boolean, mainTagWidth: number}>`
         display: flex;
         transition: transform 1s;
         transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth / 3}px))` : `translate(0)` };
@@ -85,7 +85,7 @@ const H = {
         width: 100%;
         padding: 0 0 1em 0;
     `,
-    ListWrapper: styled.div<{isActive: boolean}>`
+    ListWrapper: styled.div<{isActive: boolean, mainTagWidth: number}>`
         padding: 1em 7.5%;
         transition: 0.25s;
         height: 100vh;
@@ -139,6 +139,8 @@ interface IListTraveler {
     setRecipesList: React.Dispatch<React.SetStateAction<IRecipeItem[]>>;
     activeRecipeId: number;
     setActiveRecipeId: React.Dispatch<React.SetStateAction<number>>;
+    mainTagWidth: number;
+    setMainTagWidth: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const filterRecipes = (recipes: IRecipeItem[], filters: IFilter[]) : IRecipeItem[] => {
@@ -185,7 +187,8 @@ const filterRecipes = (recipes: IRecipeItem[], filters: IFilter[]) : IRecipeItem
     return filteredRecipes;
 }
 
-const ListTraveler : React.FC<IListTraveler> = ({activeRecipeId, setActiveRecipeId, recipesList, setRecipesList}) => {
+const ListTraveler : React.FC<IListTraveler> 
+    = ({ setActiveRecipeId, recipesList, setRecipesList, mainTagWidth, setMainTagWidth}) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [filters, setFilters] = useState<IFilter[]>([]);
 
@@ -193,6 +196,11 @@ const ListTraveler : React.FC<IListTraveler> = ({activeRecipeId, setActiveRecipe
 
     const onToggleActive = () => {
         setIsActive(!isActive);
+        if(!isActive) {
+            setMainTagWidth(window.innerWidth - (window.innerWidth / 3));
+        } else {
+            setMainTagWidth(window.innerWidth);
+        }
     };
 
     const onClickItem = (e: React.MouseEvent<HTMLDivElement>, item: IRecipeItem) => {
@@ -243,11 +251,11 @@ const ListTraveler : React.FC<IListTraveler> = ({activeRecipeId, setActiveRecipe
     }
 
     return (
-        <H.Wrapper isActive={isActive}>
+        <H.Wrapper isActive={isActive} mainTagWidth={mainTagWidth} >
             <H.ActiveBtn onClick={onToggleActive} isActive={isActive}>
                 {isActive || <H.ColBar />}
             </H.ActiveBtn>
-            <H.ListWrapper isActive={isActive}>
+            <H.ListWrapper isActive={isActive} mainTagWidth={mainTagWidth}>
                 <SearchBar setFilters={setFilters} />
                 <H.FilterContainer>
                     {filters.map((filter, i) => (

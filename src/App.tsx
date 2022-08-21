@@ -10,8 +10,9 @@ import { IRecipeItem } from './common/interface/recipe';
 
 const {light, dark} = mode;
 
-const MainWrapper = styled.main`
-  width: ${window.innerWidth }px;
+const MainWrapper = styled.main<{mainTagWidth: number}>`
+  width: ${({ mainTagWidth }) => mainTagWidth}px;
+  transition: width 1s;
 `;
 
 const ModeToggleWrapper = styled.div`
@@ -19,12 +20,12 @@ const ModeToggleWrapper = styled.div`
   padding: 5px 0 0 5px;
 `;
 
-const ListTravelerWrapper = styled.div`
-  position: fixed;
-  right: -${window.innerWidth / 3}px;
+const ListTravelerWrapper = styled.aside`
   z-index: 1;
+  position: fixed;
+  right: ${-window.innerWidth / 3}px;
   @media ${({ theme }) => theme.device.portrait} {
-    right: ${-window.innerWidth + 50}px;
+    right: ${-window.innerWidth}px;
   }
 `;
 
@@ -35,7 +36,7 @@ function App() {
     return recipe;
   }));
 
-
+  const [mainTagWidth, setMainTagWidth] = useState(window.innerWidth);
   const [activeRecipeId, setActiveRecipeId] = useState<number>(0);
   
   
@@ -51,10 +52,13 @@ function App() {
             <ModeToggle isLight={isLight} height={35} onToggle={toggleTheme}/>
           </ModeToggleWrapper>
           <ListTravelerWrapper>
-            <ListTraveler activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
+            <ListTraveler activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} 
+                recipesList={recipesList} setRecipesList={setRecipesList}
+                mainTagWidth={mainTagWidth} setMainTagWidth={setMainTagWidth}
+            />
           </ListTravelerWrapper>
-          <MainWrapper>
-            <RecipeListPage activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
+          <MainWrapper mainTagWidth={mainTagWidth}>
+            <RecipeListPage mainTagWidth={mainTagWidth} activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
           </MainWrapper>
         </div>
       </ThemeProvider>

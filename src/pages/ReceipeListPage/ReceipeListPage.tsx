@@ -11,9 +11,11 @@ interface IRecipeListPage {
   setRecipesList: React.Dispatch<React.SetStateAction<IRecipeItem[]>>;
   activeRecipeId: number;
   setActiveRecipeId: React.Dispatch<React.SetStateAction<number>>;
+  mainTagWidth: number;
 }
 
-const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList, activeRecipeId, setActiveRecipeId}) => {
+const RecipeListPage: React.FC<IRecipeListPage> 
+    = ({recipesList, setRecipesList, activeRecipeId, setActiveRecipeId, mainTagWidth}) => {
   const visibleRecipeCnt = recipesList.filter(v => v.show === true).length;
 
   const [cardWidth, setCardWidth] = useState<number>(400);
@@ -28,17 +30,23 @@ const RecipeListPage: React.FC<IRecipeListPage> = ({recipesList, setRecipesList,
   const $container = useRef<HTMLDivElement>(null);
   const originX = useRef<null | number>(null);
   
-  const currentContainerX = -(displayedActiveRecipeIdx * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2);
+  const currentContainerX = -(displayedActiveRecipeIdx * elementWidth) + (mainTagWidth / 2) - (elementWidth / 2);
 
   const getActiveCardIdx = (x : number) : number => {
-    const whiteSpace = (window.innerWidth / 2) - (elementWidth / 2);
+    const whiteSpace = (mainTagWidth / 2) - (elementWidth / 2);
     let result =  Math.abs(Math.round(( x - whiteSpace ) / elementWidth));
     if(result >= displayedList.length) {
       result = displayedList.length - 1;
     }
     return result;
   }
-
+  useEffect(() => {
+    if($container.current) {
+      console.log("useEffect");
+      $container.current.style.transform = `translate(${currentContainerX}px)`;
+    }
+  }, [currentContainerX, mainTagWidth]);
+  
   useEffect(() => {
     document.onmousemove = (e) => {
       if(originX.current && $container.current) {
