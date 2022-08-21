@@ -4,3 +4,6 @@
 
 ### 사용 기술
 React, TS, Styled-component
+
+### url
+https://bartendertail.surge.sh/
