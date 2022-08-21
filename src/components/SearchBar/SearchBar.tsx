@@ -38,7 +38,6 @@ const SearchBar : React.FC<ISearchBar> = ({ setFilters }) => {
             <S.InputText name="value" onChange={onChange} value={form.value} />
             <S.Button onClick={addFilter}>검색</S.Button>
         </S.Wrapper>
-        // <FilterBox type="타입" value="벨류" />
     )
 }
 

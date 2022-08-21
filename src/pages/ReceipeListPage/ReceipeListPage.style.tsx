@@ -32,12 +32,12 @@ export const R = {
         `;
       }};
       `,
-      CardContainer: styled.div<{activeCardIdx: number, elementWidth: number}>`
+      CardContainer: styled.div<{activeCardIdx: number, elementWidth: number, mainTagWidth: number}>`
       padding: 3.5em 0;
       height: 100%;
       display: flex;
       align-item: center;
-      transform: translate(${({ activeCardIdx, elementWidth }) => 
-        -(activeCardIdx * elementWidth) + (window.innerWidth / 2) - (elementWidth / 2)}px);
+      transform: translate(${({ activeCardIdx, elementWidth, mainTagWidth }) => 
+        -(activeCardIdx * elementWidth) + (mainTagWidth / 2) - (elementWidth / 2)}px);
     `,
   }

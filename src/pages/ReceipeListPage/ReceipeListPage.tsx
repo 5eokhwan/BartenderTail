@@ -33,8 +33,8 @@ const RecipeListPage: React.FC<IRecipeListPage>
   const currentContainerX = -(displayedActiveRecipeIdx * elementWidth) + (mainTagWidth / 2) - (elementWidth / 2);
 
   const getActiveCardIdx = (x : number) : number => {
-    const whiteSpace = (mainTagWidth / 2) - (elementWidth / 2);
-    let result =  Math.abs(Math.round(( x - whiteSpace ) / elementWidth));
+    const firstOrLastwhiteSpace = (mainTagWidth / 2) - ( elementWidth / 2 );
+    let result =  Math.abs(Math.round(( x - firstOrLastwhiteSpace ) / elementWidth ));
     if(result >= displayedList.length) {
       result = displayedList.length - 1;
     }
@@ -42,7 +42,6 @@ const RecipeListPage: React.FC<IRecipeListPage>
   }
   useEffect(() => {
     if($container.current) {
-      console.log("useEffect");
       $container.current.style.transform = `translate(${currentContainerX}px)`;
     }
   }, [currentContainerX, mainTagWidth]);
@@ -50,6 +49,7 @@ const RecipeListPage: React.FC<IRecipeListPage>
   useEffect(() => {
     document.onmousemove = (e) => {
       if(originX.current && $container.current) {
+        console.log('onmousemove');
         $container.current.style.transform = `translate(${currentContainerX + (e.clientX - originX.current)}px)`;
       }
     }
@@ -57,6 +57,7 @@ const RecipeListPage: React.FC<IRecipeListPage>
       if(originX.current && $container.current) {
         $container.current.style.transform = "";
         $container.current.style.transition = "1s";
+        console.log("e.clientX - originX.current", e.clientX - originX.current);
         setActiveRecipeId(displayedList[getActiveCardIdx(currentContainerX + (e.clientX - originX.current))].id);
         originX.current = null;
       }
@@ -80,7 +81,7 @@ const RecipeListPage: React.FC<IRecipeListPage>
         <CardCounter all={visibleRecipeCnt} cur={displayedActiveRecipeIdx + 1} />
       </R.CounterWrapper>
       <R.ListDisplay onMouseDown={ctrMouseDown}>
-        <R.CardContainer ref={$container} activeCardIdx={displayedActiveRecipeIdx} elementWidth={elementWidth}>
+        <R.CardContainer mainTagWidth={mainTagWidth} ref={$container} activeCardIdx={displayedActiveRecipeIdx} elementWidth={elementWidth}>
           {recipesList.map(v => v.show && <Card
             key={v.name}
             frontFace={<RecipeInfoFace data={v}/>} 

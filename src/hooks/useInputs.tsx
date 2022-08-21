@@ -5,7 +5,6 @@ function useInputs<T>(initialForm : T) {
 
     const onChange = useCallback((e: any) => {
         const { name, value } = e.target;
-        console.log(name, value);
         setForm(form => ({
             ...form,
             [name]: value,
