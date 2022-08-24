@@ -2,11 +2,8 @@ import { ReactElement, useState } from "react"
 import styled from "styled-components"
 
 const C = {
-  Wrapper : styled.div<{isFront: boolean}>`
-    min-width: 400px;
-    @media ${({ theme }) => theme.device.portrait} {
-      min-width: 85vw;
-    }
+  Wrapper : styled.div<{width: number, isFront: boolean}>`
+    min-width: ${({ width }) => width}px;
     height: 100%;
     background: ${({ theme }) => theme.beige};
     border-radius: 10px;
@@ -15,6 +12,8 @@ const C = {
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
     margin: 5px;
+
+    
   `,
   FrontFace: styled.div`
     font-size: 2rem;
@@ -52,10 +51,11 @@ const C = {
 interface ICard {
   frontFace: ReactElement;
   backFace: ReactElement;
+  width: number;
 }
 
 
-const Card : React.FC<ICard> = ({frontFace, backFace}) => {
+const Card : React.FC<ICard> = ({ width, frontFace, backFace}) => {
   const [isFront, setIsFront] = useState(true);
   
   
@@ -64,7 +64,7 @@ const Card : React.FC<ICard> = ({frontFace, backFace}) => {
   }
  
   return (
-    <C.Wrapper isFront={isFront} onClick={onClick}>
+    <C.Wrapper width={width} isFront={isFront} onClick={onClick}>
       <C.FrontFace>
         {frontFace}
       </C.FrontFace>

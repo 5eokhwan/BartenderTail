@@ -11,6 +11,7 @@ const R = {
         background: ${({ theme }) => darken(0.075, theme.beige)};
         padding: 1em;
         width: 100%;
+        height: 3em;
     `,
     Name: styled.div`
         text-align: center;
@@ -49,7 +50,7 @@ const R = {
         margin-bottom: 0.5em;
         text-align: center;
         padding: 0.25em 0;
-        height: ${({ length }) => length * 1 + 0.5}em;
+        min-height: ${({ length }) => length * 1 + 0.5}em;
         
         transition: 0.5s;
         margin-bottom: 0.5em;

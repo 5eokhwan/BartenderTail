@@ -10,15 +10,17 @@ export const S = {
     `,
     Select: styled.select`
         width: 20%;
+        min-width: 6em;
         height: 100%;
-        font-size: 1rem;
+        font-size: 0.75rem;
         border: 1px solid #fff;
         color: black;
     `,
     Option: styled.option`
+        color: black;
     `,
     InputText: styled.input`
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         width: 70%;
         height: 100%;
         border: 1px solid #fff;
@@ -26,9 +28,10 @@ export const S = {
     `,
     Button: styled.button`
         width: 10%;
+        font-size: 0.75rem;
+        min-width: 4em;
         height: 100%;
         border: 1px solid #fff;
         color: black;
-
     `
 }

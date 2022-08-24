@@ -4,7 +4,6 @@ import { lighten } from 'polished';
 export const R = {
     Wrapper: styled.div`
       height: 100vh;
-      // width: 100vw;
       width: 100%;
     `,
     CounterWrapper: styled.div`
@@ -32,12 +31,11 @@ export const R = {
         `;
       }};
       `,
-      CardContainer: styled.div<{activeCardIdx: number, elementWidth: number, mainTagWidth: number}>`
-      padding: 3.5em 0;
-      height: 100%;
-      display: flex;
-      align-item: center;
-      transform: translate(${({ activeCardIdx, elementWidth, mainTagWidth }) => 
-        -(activeCardIdx * elementWidth) + (mainTagWidth / 2) - (elementWidth / 2)}px);
+      CardContainer: styled.div<{ posX: number }>`
+        padding: 3.5em 0;
+        height: 100%;
+        display: flex;
+        align-item: center;
+        transform: translate(${({ posX }) => posX}px);
     `,
   }

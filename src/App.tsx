@@ -4,14 +4,14 @@ import ListTraveler from './components/ListTraveler/ListTraveler';
 import ModeToggle from './components/ModeToggle';
 import RecipeListPage from './pages/ReceipeListPage/ReceipeListPage';
 import GlobalStyle from './style/global';
-import { deviceSizes, mode } from './style/theme';
+import { mode } from './style/theme';
 import recipes from './datas/recipe';
 import { IRecipeItem } from './common/interface/recipe';
 
-const {light, dark} = mode;
+const { light, dark } = mode;
 
 const MainWrapper = styled.main<{mainTagWidth: number}>`
-  width: ${({ mainTagWidth }) => mainTagWidth}px;
+  width: ${({ mainTagWidth }) => mainTagWidth }px;
   transition: width 1s;
 `;
 
@@ -25,7 +25,7 @@ const ListTravelerWrapper = styled.aside`
   position: fixed;
   right: ${-window.innerWidth / 3}px;
   @media ${({ theme }) => theme.device.portrait} {
-    right: ${-window.innerWidth}px;
+    right: ${-window.innerWidth + 50}px;
   }
 `;
 

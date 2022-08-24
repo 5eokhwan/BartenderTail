@@ -187,7 +187,7 @@ const filterRecipes = (recipes: IRecipeItem[], filters: IFilter[]) : IRecipeItem
     return filteredRecipes;
 }
 
-const ListTraveler : React.FC<IListTraveler> 
+const ListTraveler : React.FC<IListTraveler>
     = ({ setActiveRecipeId, recipesList, setRecipesList, mainTagWidth, setMainTagWidth}) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [filters, setFilters] = useState<IFilter[]>([]);
@@ -236,11 +236,10 @@ const ListTraveler : React.FC<IListTraveler>
 
     };
 
-    const toggleShow = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
+    const toggleShow = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
         e.stopPropagation();
-        setRecipesList(recipesList.map((recipe, i) => 
-            i === idx ? { ...recipe, show : !recipe.show } : recipe )
-        );
+        setRecipesList(recipesList.map(recipe => recipe.id === id 
+            ? { ...recipe, show: !recipe.show } : {...recipe}))
     };
 
     const removeFilter = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -278,7 +277,7 @@ const ListTraveler : React.FC<IListTraveler>
                     {filteredList.map((v,i) => 
                         <H.ItemBox key={v.name + i} onClick={(e) => onClickItem(e, v)}>
                             <H.Name>{v.name}</H.Name>
-                            <H.Checker onClick={(e) => toggleShow(e, i)}>
+                            <H.Checker onClick={(e) => toggleShow(e, v.id)}>
                                 {v.show && <H.Check />}
                             </H.Checker>
                         </H.ItemBox>
