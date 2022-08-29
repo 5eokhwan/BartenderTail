@@ -12,8 +12,6 @@ const C = {
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
     margin: 5px;
-
-    
   `,
   FrontFace: styled.div`
     font-size: 2rem;

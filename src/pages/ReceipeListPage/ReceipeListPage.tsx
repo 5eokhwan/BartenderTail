@@ -89,7 +89,7 @@ const RecipeListPage: React.FC<IRecipeListPage>
           />)}
         </R.CardContainer>
       </R.ListDisplay>
-      <Controller />
+      {/* <Controller setActiveRecipeId={setActiveRecipeId} max={recipesList.length} /> */}
     </R.Wrapper>
   )
 }

@@ -21,7 +21,7 @@ const ItemRow = styled.div`
 
 const H = {
     Wrapper: styled.div<{isActive : boolean, mainTagWidth: number}>`
-        display: flex;
+        position: relative;    
         transition: transform 1s;
         transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth / 3}px))` : `translate(0)` };
         
@@ -30,7 +30,8 @@ const H = {
         }
     `,
     ActiveBtn: styled.div<{isActive : boolean}>`
-        position: relative;
+        position: absolute;
+        left: -50px;
         width: 50px;
         height: 50px;
         background: ${({ theme }) => theme.deepTeal};
@@ -61,7 +62,6 @@ const H = {
             transition: 0.2s;
             transform: translateY(5px);
         }
-        
         ${({isActive}) =>  isActive && `
             &::before {
                 transform: translateY(0px) rotate(45deg);
@@ -92,7 +92,7 @@ const H = {
         background: ${({ theme }) => theme.deepTeal};
         width: ${window.innerWidth / 3}px;
         overflow-y: scroll;
-
+        
         @media ${({ theme }) => theme.device.portrait} {
             width: ${window.innerWidth - 50}px;
         }
