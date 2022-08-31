@@ -12,11 +12,11 @@ const C = {
     transform-style: preserve-3d;
     transition: transform 0.4s ease;
     margin: 5px;
-  `,
+    `,
   FrontFace: styled.div`
     font-size: 2rem;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;

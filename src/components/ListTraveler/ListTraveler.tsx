@@ -24,6 +24,7 @@ const H = {
         position: relative;    
         transition: transform 1s;
         transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth / 3}px))` : `translate(0)` };
+        z-index: 10;
         
         @media ${({ theme }) => theme.device.portrait} {
             transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth - 50}px))` : `translate(0)` };
@@ -115,7 +116,7 @@ const H = {
     `,
     Name: styled.div`
         width: 70%;
-        overflow: hidden;
+        overflow-y: visible;
     `,
     Checker: styled.div`
         height: 1.75em;

@@ -10,7 +10,8 @@ export const R = {
       height: 15%;
       padding: 0.5em 0;
     `,
-    ListDisplay : styled.div`
+    CardsDisplay : styled.div`
+      position: relative;
       user-select: none;
       cursor: grab;
       height: 70%;

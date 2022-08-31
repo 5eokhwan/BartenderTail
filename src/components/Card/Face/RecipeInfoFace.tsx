@@ -52,7 +52,6 @@ const R = {
         padding: 0.25em 0;
         min-height: ${({ length }) => length * 1 + 0.5}em;
         
-        transition: 0.5s;
         margin-bottom: 0.5em;
         ${({ theme }) => {
             const selected = theme.beige;

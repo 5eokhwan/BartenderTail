@@ -4,7 +4,7 @@ import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
 import RecipeInfoFace from '../../components/Card/Face/RecipeInfoFace';
 import CardCounter from './component/CardCounter';
-import Controller from './component/Controller';
+import MoveButtonTray from './component/MoveButtonTray';
 import { R }  from './ReceipeListPage.style';
 
 interface IRecipeListPage {
@@ -24,7 +24,7 @@ const RecipeListPage: React.FC<IRecipeListPage>
   
   const elementWidth = cardWidth + (cardMargin * 2);
   
-  const displayedList = useMemo(() => recipesList.filter((v) => v.show === true), [recipesList]);
+  const displayedList : IRecipeItem[] = useMemo(() => recipesList.filter((v) => v.show === true), [recipesList]);
 
   const displayedActiveRecipeIdx = displayedList.findIndex((v) => v.id === activeRecipeId);
   
@@ -48,15 +48,15 @@ const RecipeListPage: React.FC<IRecipeListPage>
   }, [currentContainerX, mainTagWidth]);
   
   useEffect(() => {
-    document.onmousemove = (e) => {
+    document.onmousemove = (e) : void => {
       if(originX.current && $container.current) {
         $container.current.style.transform = `translate(${currentContainerX + (e.clientX - originX.current)}px)`;
       }
     }
-    document.onmouseup = (e) => {
+    document.onmouseup = (e) : void => {
       if(originX.current && $container.current) {
         $container.current.style.transform = "";
-        $container.current.style.transition = "1s";
+        $container.current.style.transition = "0.75s";
         setActiveRecipeId(displayedList[getActiveCardIdx(currentContainerX + (e.clientX - originX.current))].id);
         originX.current = null;
       }
@@ -79,17 +79,19 @@ const RecipeListPage: React.FC<IRecipeListPage>
       <R.CounterWrapper>
         <CardCounter all={visibleRecipeCnt} cur={displayedActiveRecipeIdx + 1} />
       </R.CounterWrapper>
-      <R.ListDisplay onMouseDown={ctrMouseDown}>
-        <R.CardContainer posX={currentContainerX} ref={$container}>
-          {recipesList.map(v => v.show && <Card
-            key={v.name}
-            width={cardWidth}
-            frontFace={<RecipeInfoFace data={v}/>}
-            backFace={<RecipeInfoBackFace data={v}/>}
-          />)}
-        </R.CardContainer>
-      </R.ListDisplay>
-      {/* <Controller setActiveRecipeId={setActiveRecipeId} max={recipesList.length} /> */}
+      <R.CardsDisplay onMouseDown={ctrMouseDown}>
+        <MoveButtonTray setActiveRecipeId={setActiveRecipeId} displayedList={displayedList} activeRecipeId={activeRecipeId}>
+          <R.CardContainer posX={currentContainerX} ref={$container}>
+            {recipesList.map(v => v.show && <Card
+              key={v.name}
+              width={cardWidth}
+              frontFace={<RecipeInfoFace data={v}/>}
+              backFace={<RecipeInfoBackFace data={v}/>}
+              />)}
+          </R.CardContainer>
+        </MoveButtonTray>
+      </R.CardsDisplay>
+      
     </R.Wrapper>
   )
 }
