@@ -91,7 +91,6 @@ const RecipeListPage: React.FC<IRecipeListPage>
           </R.CardContainer>
         </MoveButtonTray>
       </R.CardsDisplay>
-      
     </R.Wrapper>
   )
 }

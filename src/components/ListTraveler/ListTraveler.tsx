@@ -24,8 +24,6 @@ const H = {
         position: relative;    
         transition: transform 1s;
         transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth / 3}px))` : `translate(0)` };
-        z-index: 10;
-        
         @media ${({ theme }) => theme.device.portrait} {
             transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth - 50}px))` : `translate(0)` };
         }

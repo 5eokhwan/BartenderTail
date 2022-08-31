@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styled from "styled-components"
 import { IRecipeItem } from "../../../common/interface/recipe";
+import { ReactComponent as Arrow } from "../../../svg/arrow.svg";
 
 const M = {
     Wrapper: styled.div`
@@ -14,66 +15,38 @@ const M = {
         position: absolute;
         z-index: 1;
         border: none;
-        background: ${({ theme }) => theme.white};
-        opacity: 30%;
         height: 100%;
         width: 7.5%;
         max-width: 50px;
+        background: transparent;
+        &:hover {
+            background: rgb(255 255 255 / 30%);
+        }
+        &:active {
+            background: rgb(255 255 255 / 45%);
+        }
     `,
     LArrow: styled.i`
         position: relative;
-        &::before {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 2px;
-            transition: 0.2s;
-            background: ${({ theme }) => theme.black};
-            transform: translateY(-5px) rotateZ(-45deg);
-        }
-        &::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 2px;
-            transition: 0.2s;
-            background: ${({ theme }) => theme.black};
-            transform: translateY(5px) rotateZ(45deg);
-        }
     `,
     RightButton: styled.button`
         position: absolute;
         z-index: 1;
         right: 0;
         border: none;
-        background: ${({ theme }) => theme.white};
-        opacity: 30%;
         height: 100%;
         width: 7.5%;
         max-width: 50px;
+                background: transparent;
+        &:hover {
+            background: rgb(255 255 255 / 30%);
+        }
+        &:active {
+            background: rgb(255 255 255 / 45%);
+        }
     `,
     RArrow: styled.i`
         position: relative;
-        &::before {
-            content: '';
-            position: absolute;
-         
-            width: 15px;
-            height: 2px;
-            transition: 0.2s;
-            background: ${({ theme }) => theme.black};
-            transform: translateY(-5px) rotateZ(-135deg);
-        }
-        &::after {
-            content: '';
-            position: absolute;
-         
-            width: 15px;
-            height: 2px;
-            transition: 0.2s;
-            background: ${({ theme }) => theme.black};
-            transform: translateY(5px) rotateZ(135deg);
-        }
     `,
 }
 
@@ -98,10 +71,12 @@ const MoveButtonTray : React.FC<IMoveButton> =
     return (
         <M.Wrapper>
             <M.LeftButton onClick={() => onMove(-1)}>
-                <M.LArrow />
+                <Arrow style={{
+                    transform: 'rotate(180deg)'
+                }}/>
             </M.LeftButton>
             <M.RightButton onClick={() => onMove(1)}>
-                <M.RArrow />
+                <Arrow />
             </M.RightButton>
             {children}
         </M.Wrapper>

@@ -21,7 +21,7 @@ const ModeToggleWrapper = styled.div`
 `;
 
 const ListTravelerWrapper = styled.aside`
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   right: ${-window.innerWidth / 3}px;
   @media ${({ theme }) => theme.device.portrait} {
