@@ -47,7 +47,10 @@ const Controller : React.FC<IController> = ({ displayedList, setRecipesList }) =
         }))
     }
     const onIntermingle = () => {
-        console.log("");
+        setRecipesList(pre => {
+            const newList = [...pre];
+            return newList.sort(() => Math.random() - 0.5);
+        });
     }
     return (
         <C.Wrapper>
