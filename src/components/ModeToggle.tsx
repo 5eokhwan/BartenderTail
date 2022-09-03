@@ -27,6 +27,14 @@ const moveUp = keyframes`
     }
 `;
 
+const rotateZ = keyframes`
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+`;
 
 const M = {
     Wrapper: styled.div<{height: number, isLight: boolean}>`
@@ -79,6 +87,26 @@ const M = {
             transition: background 0.5s;
             background: ${({isLight}) => isLight ? '#1cb7ff' : '#22005c'};
         }
+    `,
+    StarContainer: styled.div<{isLight:boolean}>`
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        top: 50%;
+        left: -50%;
+        z-index: 1;
+        animation: ${rotateZ} 5s infinite linear;
+        transform-origin: top right;
+
+    `,
+    Star: styled.div<{top?: number, left?: number}>`
+        position: absolute;
+        top: ${({ top }) =>top ? top : 0}px;
+        left: ${({ left }) =>left ? left : 0}px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #edebd3;
     `
 }
 
@@ -91,12 +119,26 @@ interface IModeToggle {
 const ModeToggle : React.FC<IModeToggle> = ({isLight, onToggle, height}) => {
     return (
     <M.Wrapper height={height} onClick={onToggle} isLight={isLight}>
-        <M.clude isLight={isLight} height={height}/>
-        <M.clude isLight={isLight} height={height} top={height / 5} speed={4}/>
-        <M.clude isLight={isLight} height={height} top={height / 2} speed={7}/>
-        <M.clude isLight={isLight} height={height} top={height / 1.25} speed={6}/>
-        <M.Sun isLight={isLight}/>
-        <M.Moon isLight={isLight}/>
+        <>
+            <M.clude isLight={isLight} height={height}/>
+            <M.clude isLight={isLight} height={height} top={height / 5} speed={4}/>
+            <M.clude isLight={isLight} height={height} top={height / 2} speed={7}/>
+            <M.clude isLight={isLight} height={height} top={height / 1.25} speed={6}/>
+            <M.Sun isLight={isLight}/>
+        </>
+        <>
+            <M.Moon isLight={isLight}>
+                <M.StarContainer isLight={isLight}>
+                    <M.Star top={-15} left={-5}/>
+                    <M.Star />
+                    <M.Star top={5} left={8}/>
+                    <M.Star top={20} left={-10}/>
+                    <M.Star top={35} left={55}/>
+                    <M.Star top={-10} left={70}/>
+                    <M.Star top={-3} left={65}/>
+                </M.StarContainer>
+            </M.Moon>
+        </>
     </M.Wrapper>)
 }
 
