@@ -24,7 +24,7 @@ const ListTravelerWrapper = styled.aside`
   z-index: 2;
   position: fixed;
   right: ${-window.innerWidth / 3}px;
-  @media ${({ theme }) => theme.device.portrait} {
+  @media ${({ theme }) => theme.device.tablet} {
     right: ${-window.innerWidth + 50}px;
   }
 `;

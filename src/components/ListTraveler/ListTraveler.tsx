@@ -24,7 +24,7 @@ const H = {
         position: relative;    
         transition: transform 1s;
         transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth / 3}px))` : `translate(0)` };
-        @media ${({ theme }) => theme.device.portrait} {
+        @media ${({ theme }) => theme.device.tablet} {
             transform: ${({ isActive }) =>  isActive ? `translate(calc(-${window.innerWidth - 50}px))` : `translate(0)` };
         }
     `,
@@ -92,7 +92,7 @@ const H = {
         width: ${window.innerWidth / 3}px;
         overflow-y: scroll;
         
-        @media ${({ theme }) => theme.device.portrait} {
+        @media ${({ theme }) => theme.device.tablet} {
             width: ${window.innerWidth - 50}px;
         }
     `,

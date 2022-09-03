@@ -65,7 +65,7 @@ const MoveButtonTray : React.FC<IMoveButton> =
         if( nextPos < 0 || nextPos >= displayedList.length) {
             return;
         }
-        setActiveRecipeId(displayedList.findIndex((v) => activeRecipeId === v.id) + move);
+        setActiveRecipeId(displayedList[nextPos].id);
     }
 
     return (
