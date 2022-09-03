@@ -45,7 +45,7 @@ const R = {
         padding: 0.25em 0;
         background: ${({ theme }) => darken(0.05, theme.beige)};
     `,
-    Content: styled.div<{length: number}>`
+    Content: styled.ol<{length: number}>`
         font-size: 1rem;
         margin-bottom: 0.5em;
         text-align: center;
@@ -79,12 +79,12 @@ const RecipeInfoFace : React.FC<IRecipeInfoFace> = ({ data }) => {
                 <R.Row>
                     <R.Glass>
                         <R.Title>글라스</R.Title>
-                        <R.Content length={1}>{glass[data.glass]}</R.Content>
+                        <R.Content length={1}><li>{glass[data.glass]}</li></R.Content>
                     </R.Glass>
                     <R.Technique>
                         <R.Title>기법</R.Title>
                         <R.Content length={data.technique.length}>
-                            {data.technique.map((v, i) =>(<div key={i}>{technique[v]}</div>))}
+                            {data.technique.map((v, i) =>(<li key={i}>{technique[v]}</li>))}
                         </R.Content>
                     </R.Technique>
                 </R.Row>
@@ -92,16 +92,16 @@ const RecipeInfoFace : React.FC<IRecipeInfoFace> = ({ data }) => {
                     <R.Title>레시피</R.Title>
                     <R.Content length={data.ingredient.length}>
                         {data.ingredient.map((v, i) => 
-                            (<div key={i}>{ingredient[v.type][v.name]}
+                            (<li key={i}>{ingredient[v.type][v.name]}
                             {v.amount && <span> {v.amount}</span>}
-                            <span> {unit[v.unit]}</span></div>))
+                            <span> {unit[v.unit]}</span></li>))
                         }
                     </R.Content>
                 </R.Recipe>
                 {data.ganish.length ? <R.Garnish>
                     <R.Title>가니쉬</R.Title>
                     <R.Content length={data.ganish.length}>
-                         {data.ganish.map((v,i) => (<div key={i}>{garnish[v]}</div>))}
+                         {data.ganish.map((v,i) => (<li key={i}>{garnish[v]}</li>))}
                     </R.Content>
                 </R.Garnish> : ''}
             </R.ContentWrapper>

@@ -1,52 +1,58 @@
 import styled from "styled-components";
+import { lighten } from 'polished';
+import { IRecipeItem } from "../../../common/interface/recipe";
 
 const C = {
     Wrapper: styled.div`
         width: 100%;
+        height: 15%;
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        align-items: center;
+        gap: 2em;
     `,
-    PreviousBtn: styled.button`
+    Button: styled.button`
         border: 2.5px solid ${({ theme })=>theme.white };
+        height: 1.5em;
         background: ${({ theme })=>theme.deepTeal };
-        font-size: 3rem;
-    `,
-    NextBtn: styled.button`
-        border: 2.5px solid ${({ theme })=>theme.white };
-        background: ${({ theme })=>theme.deepTeal };
-        font-size: 3rem;
+        font-size: 2em;
+
+        &:hover {
+            background: ${({ theme })=>lighten(0.05, theme.deepTeal) };
+          }
+          &:active {
+            background: ${({ theme })=>lighten(0.075, theme.deepTeal) };
+          }
     `,
 }
 
 interface IController {
-    setActiveRecipeId: React.Dispatch<React.SetStateAction<number>>;
-    max: number;
+    displayedList: IRecipeItem[];
+    setRecipesList: React.Dispatch<React.SetStateAction<IRecipeItem[]>>;
 }
 
-const Controller : React.FC<IController> = ({ setActiveRecipeId, max }) => {
-    const onPrevious = () => {
-        setActiveRecipeId(pre => {
-            if(0 >= pre - 1) {
-                return 0;
+const Controller : React.FC<IController> = ({ displayedList, setRecipesList }) => {
+    const onReverse = () => {
+        const displayedListIds: number[] = displayedList.map(v => v.id);
+        setRecipesList(pre => pre.map((v)=> {
+            if(displayedListIds.includes(v.id)) {
+                return {
+                    ...v,
+                    reverse: true,
+                }
             }
-            return pre - 1;
-        });
-    };
-
-    const onNext = () => {
-        setActiveRecipeId(pre => {
-            if(max <= pre + 1) {
-                return pre;
+            else {
+                return v;
             }
-            return pre + 1;
-        });
-    };
-
+        }))
+    }
+    const onIntermingle = () => {
+        console.log("");
+    }
     return (
         <C.Wrapper>
-            <C.PreviousBtn onClick={onPrevious}>◀</C.PreviousBtn>
-            <C.NextBtn onClick={onNext}>▶</C.NextBtn>
+            <C.Button onClick={onReverse}>모두 뒤집기</C.Button>
+            <C.Button onClick={onIntermingle}>순서 섞기</C.Button>
         </C.Wrapper>
     )
 }

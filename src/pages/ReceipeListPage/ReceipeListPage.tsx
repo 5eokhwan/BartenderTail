@@ -4,6 +4,7 @@ import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
 import RecipeInfoFace from '../../components/Card/Face/RecipeInfoFace';
 import CardCounter from './component/CardCounter';
+import Controller from './component/Controller';
 import MoveButtonTray from './component/MoveButtonTray';
 import { R }  from './ReceipeListPage.style';
 
@@ -16,7 +17,7 @@ interface IRecipeListPage {
 }
 
 const RecipeListPage: React.FC<IRecipeListPage>
-    = ({recipesList, activeRecipeId, setActiveRecipeId, mainTagWidth}) => {
+    = ({recipesList, setRecipesList, activeRecipeId, setActiveRecipeId, mainTagWidth}) => {
   const visibleRecipeCnt = recipesList.filter(v => v.show === true).length;
 
   const [cardWidth, setCardWidth] = useState<number>(mainTagWidth > window.innerHeight ? 400 : mainTagWidth * (80 / 100));
@@ -87,10 +88,16 @@ const RecipeListPage: React.FC<IRecipeListPage>
               width={cardWidth}
               frontFace={<RecipeInfoFace data={v}/>}
               backFace={<RecipeInfoBackFace data={v}/>}
-              />)}
+              reverse={v.reverse}
+              changeReverse={() => {
+                setRecipesList(recipesList.map(recipe => 
+                  v.id === recipe.id ? {...recipe, reverse: !recipe.reverse } : recipe ));
+              }}
+            />)}
           </R.CardContainer>
         </MoveButtonTray>
       </R.CardsDisplay>
+      <Controller setRecipesList={setRecipesList} displayedList={displayedList} />
     </R.Wrapper>
   )
 }

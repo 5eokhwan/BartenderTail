@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react"
+import { ReactElement, useState, useEffect } from "react"
 import styled from "styled-components"
 
 const C = {
@@ -50,19 +50,19 @@ interface ICard {
   frontFace: ReactElement;
   backFace: ReactElement;
   width: number;
+  reverse: boolean;
+  changeReverse: () => void;
 }
 
 
-const Card : React.FC<ICard> = ({ width, frontFace, backFace}) => {
-  const [isFront, setIsFront] = useState(true);
-  
-  
+const Card : React.FC<ICard> = ({ width, frontFace, backFace, reverse, changeReverse }) => {
+
   const onClick = () => {
-    setIsFront(!isFront);
+    changeReverse();
   }
  
   return (
-    <C.Wrapper width={width} isFront={isFront} onClick={onClick}>
+    <C.Wrapper width={width} isFront={!reverse} onClick={onClick}>
       <C.FrontFace>
         {frontFace}
       </C.FrontFace>

@@ -33,6 +33,7 @@ function App() {
   const [recipesList, setRecipesList] = useState<IRecipeItem[]>(recipes.map(v  => {
     const recipe = v as IRecipeItem;
     recipe.show = true;
+    recipe.reverse = false;
     return recipe;
   }));
 
