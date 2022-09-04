@@ -95,7 +95,7 @@ const M = {
         top: 50%;
         left: -50%;
         z-index: 1;
-        animation: ${rotateZ} 5s infinite linear;
+        animation: ${rotateZ} 10s infinite linear;
         transform-origin: top right;
 
     `,

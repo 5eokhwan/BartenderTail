@@ -32,6 +32,21 @@ interface IController {
 }
 
 const Controller : React.FC<IController> = ({ displayedList, setRecipesList }) => {
+    const onReverseFront = () => {
+        const displayedListIds: number[] = displayedList.map(v => v.id);
+        setRecipesList(pre => pre.map((v)=> {
+            if(displayedListIds.includes(v.id)) {
+                return {
+                    ...v,
+                    reverse: false,
+                }
+            }
+            else {
+                return v;
+            }
+        }))
+    }
+    
     const onReverseBack = () => {
         const displayedListIds: number[] = displayedList.map(v => v.id);
         setRecipesList(pre => pre.map((v)=> {
@@ -54,7 +69,7 @@ const Controller : React.FC<IController> = ({ displayedList, setRecipesList }) =
     }
     return (
         <C.Wrapper>
-            <C.Button onClick={onReverseBack}>모두 앞면</C.Button>
+            <C.Button onClick={onReverseFront}>모두 앞면</C.Button>
             <C.Button onClick={onReverseBack}>모두 뒷면</C.Button>
             <C.Button onClick={onIntermingle}>순서 섞기</C.Button>
         </C.Wrapper>
