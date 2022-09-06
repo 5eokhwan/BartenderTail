@@ -16,6 +16,7 @@ const F = {
         white-space: nowrap;
         display: inline-block;
         margin: 0 0.25em 0.25em 0;
+
         &:hover {
             background: ${({ theme }) => darken(0.1,theme.white)};
         }
@@ -33,25 +34,26 @@ const F = {
         height: 1em;
         position: relative;
         display: inline-block;
-    &::before {
-        background: ${({ theme }) => theme.black};
-        content: '';
-        position: absolute;
-        top: 0.5em;
-        width: 100%;
-        height: 0.1em;
-        transform: rotate(-45deg);
-    }
 
-    &::after {
-        background: ${({ theme }) => theme.black};
-        content: '';
-        position: absolute;
-        top: 0.5em;
-        width: 100%;
-        height: 0.1em;
-        transform: rotate(45deg);
-    }
+        &::before {
+            background: ${({ theme }) => theme.black};
+            content: '';
+            position: absolute;
+            top: 0.5em;
+            width: 100%;
+            height: 0.1em;
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            background: ${({ theme }) => theme.black};
+            content: '';
+            position: absolute;
+            top: 0.5em;
+            width: 100%;
+            height: 0.1em;
+            transform: rotate(45deg);
+        }
     `
 }
 

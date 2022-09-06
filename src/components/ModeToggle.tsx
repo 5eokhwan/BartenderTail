@@ -99,10 +99,11 @@ const M = {
         transform-origin: top right;
 
     `,
-    Star: styled.div<{top?: number, left?: number}>`
+    Star: styled.div<{top?: number, left?: number, isLight: boolean}>`
         position: absolute;
         top: ${({ top }) =>top ? top : 0}px;
         left: ${({ left }) =>left ? left : 0}px;
+        opacity: ${({isLight}) => !isLight ? 0.75 : 0};
         width: 3px;
         height: 3px;
         border-radius: 50%;
@@ -129,13 +130,13 @@ const ModeToggle : React.FC<IModeToggle> = ({isLight, onToggle, height}) => {
         <>
             <M.Moon isLight={isLight}>
                 <M.StarContainer isLight={isLight}>
-                    <M.Star top={-15} left={-5}/>
-                    <M.Star />
-                    <M.Star top={5} left={8}/>
-                    <M.Star top={20} left={-10}/>
-                    <M.Star top={35} left={55}/>
-                    <M.Star top={-10} left={70}/>
-                    <M.Star top={-3} left={65}/>
+                    <M.Star isLight={isLight} top={-15} left={-5}/>
+                    <M.Star isLight={isLight}/>
+                    <M.Star isLight={isLight} top={5} left={8}/>
+                    <M.Star isLight={isLight} top={20} left={-10}/>
+                    <M.Star isLight={isLight} top={35} left={55}/>
+                    <M.Star isLight={isLight} top={-10} left={70}/>
+                    <M.Star isLight={isLight} top={-3} left={65}/>
                 </M.StarContainer>
             </M.Moon>
         </>

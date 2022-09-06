@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from "react"
+import { ReactElement } from "react"
 import styled from "styled-components"
 
 const C = {

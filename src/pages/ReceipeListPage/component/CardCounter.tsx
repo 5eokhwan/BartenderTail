@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const C = {
     Wrapper: styled.div`
-        font-size: 3.5em;
+        position: absolute;
+        width: 100%;
+        font-size: 3em;
         font-family: SansBold;
         display: flex;
         justify-content: center;

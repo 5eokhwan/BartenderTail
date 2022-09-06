@@ -12,17 +12,22 @@ const C = {
         gap: 2em;
     `,
     Button: styled.button`
-        border: 2.5px solid ${({ theme })=>theme.white };
+        border: none;
         height: 1.5em;
         background: ${({ theme })=>theme.deepTeal };
         font-size: 2em;
 
         &:hover {
             background: ${({ theme })=>lighten(0.05, theme.deepTeal) };
-          }
-          &:active {
+        }
+        &:active {
             background: ${({ theme })=>lighten(0.075, theme.deepTeal) };
-          }
+        }
+        
+        @media ${({ theme }) => theme.device.tablet} {
+            font-size: 1em;
+            height: 2.5em;
+        }
     `,
 }
 
