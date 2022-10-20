@@ -73,4 +73,4 @@ const Card : React.FC<ICard> = ({ width, frontFace, backFace, reverse, changeRev
   )
 }
 
-export default Card
+export default Card;

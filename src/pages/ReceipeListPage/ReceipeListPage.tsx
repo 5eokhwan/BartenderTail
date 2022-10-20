@@ -3,7 +3,6 @@ import { IRecipeItem } from '../../common/interface/recipe';
 import Card from '../../components/Card/Card';
 import RecipeInfoBackFace from '../../components/Card/Face/RecipeInfoBackFace';
 import RecipeInfoFace from '../../components/Card/Face/RecipeInfoFace';
-import Header from '../../components/Header';
 import CardCounter from './component/CardCounter';
 import Controller from './component/Controller';
 import MoveButtonTray from './component/MoveButtonTray';
@@ -78,7 +77,6 @@ const RecipeListPage: React.FC<IRecipeListPage>
 
   return (
     <R.Wrapper>
-      <Header height='15%'/>
       <R.CardsDisplay onMouseDown={ctrMouseDown}>
         <CardCounter all={visibleRecipeCnt} cur={displayedActiveRecipeIdx + 1} />
         <MoveButtonTray setActiveRecipeId={setActiveRecipeId} displayedList={displayedList} activeRecipeId={activeRecipeId}>

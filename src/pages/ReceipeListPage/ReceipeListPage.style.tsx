@@ -3,18 +3,17 @@ import { lighten } from 'polished';
 
 export const R = {
     Wrapper: styled.div`
-      height: 100vh;
+      height: 90%;
       width: 100%;
     `,
     CounterWrapper: styled.div`
-      height: 15%;
       padding: 0 0 0.5em 0;
     `,
     CardsDisplay : styled.div`
       position: relative;
       user-select: none;
       cursor: grab;
-      height: 70%;
+      height: 80%;
       min-height: 500px;
       width: 100%;
       overflow: hidden;

@@ -7,11 +7,26 @@ import GlobalStyle from './style/global';
 import { mode } from './style/theme';
 import recipes from './datas/recipe';
 import { IRecipeItem } from './common/interface/recipe';
+import { Routes, Route } from "react-router-dom";
+import TestPage from './pages/TestPage/TestPage';
+import Header from './components/Header';
 
 const { light, dark } = mode;
 
+const AppWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+`;
+
+const HeaderWrapper = styled.header`
+  height: 5%;
+  background: ${({ theme }) => theme.white};
+`;
+
+
 const MainWrapper = styled.main<{mainTagWidth: number}>`
   width: ${({ mainTagWidth }) => mainTagWidth }px;
+  height: 95%;
   transition: width 1s;
 `;
 
@@ -40,7 +55,6 @@ function App() {
   const [mainTagWidth, setMainTagWidth] = useState(window.innerWidth);
   const [activeRecipeId, setActiveRecipeId] = useState<number>(0);
   
-  
   const [isLight, setIsLight] = useState(true);
   const toggleTheme = () => {setIsLight(!isLight)};
 
@@ -48,7 +62,7 @@ function App() {
   return (
     <ThemeProvider theme={isLight ? light : dark}>
       <GlobalStyle />
-        <div className="App">
+        <AppWrapper className="App">
           <ModeToggleWrapper>
             <ModeToggle isLight={isLight} height={35} onToggle={toggleTheme}/>
           </ModeToggleWrapper>
@@ -58,10 +72,16 @@ function App() {
                 mainTagWidth={mainTagWidth} setMainTagWidth={setMainTagWidth}
             />
           </ListTravelerWrapper>
+          <HeaderWrapper>
+            <Header />
+          </HeaderWrapper>
           <MainWrapper mainTagWidth={mainTagWidth}>
-            <RecipeListPage mainTagWidth={mainTagWidth} activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>
+            <Routes>
+              <Route path='/' element={<RecipeListPage mainTagWidth={mainTagWidth} activeRecipeId={activeRecipeId} setActiveRecipeId={setActiveRecipeId} recipesList={recipesList} setRecipesList={setRecipesList}/>} />
+              <Route path='/test' element={<TestPage />} />
+            </Routes>
           </MainWrapper>
-        </div>
+        </AppWrapper>
       </ThemeProvider>
   );
 }
